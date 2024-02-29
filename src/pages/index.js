@@ -2,9 +2,9 @@ import * as React from "react"
 import { Link } from "gatsby"
 import { StaticImage } from "gatsby-plugin-image"
 
-import Layout from "../react/components/layout"
-import Seo from "../react/components/seo"
-import * as styles from "../react/components/index.module.css"
+import Layout from "~/react/components/layout"
+import Seo from "~/react/components/seo"
+import * as styles from "~/react/components/index.module.css"
 
 const links = [
   {
@@ -73,7 +73,7 @@ const IndexPage = () => (
   <Layout>
     <div className={styles.textCenter}>
       <StaticImage
-        src="../images/example.png"
+        src="../assets/images/example.png"
         loading="eager"
         width={64}
         quality={95}
