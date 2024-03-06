@@ -1,10 +1,11 @@
-import * as React from "react"
+import "./index.css"
+import React from "react"
 import { Link } from "gatsby"
 import { StaticImage } from "gatsby-plugin-image"
+import { clsx } from "clsx"
 
 import Layout from "~/react/components/layout"
 import Seo from "~/react/components/seo"
-import * as styles from "~/react/components/index.module.css"
 
 const links = [
   {
@@ -71,7 +72,7 @@ const utmParameters = `?utm_source=starter&utm_medium=start-page&utm_campaign=de
 
 const IndexPage = () => (
   <Layout>
-    <div className={styles.textCenter}>
+    <div className={clsx("textCenter")}>
       <StaticImage
         src="../assets/images/example.png"
         loading="eager"
@@ -84,7 +85,7 @@ const IndexPage = () => (
       <h1>
         Welcome to <b>Gatsby!</b>
       </h1>
-      <p className={styles.intro}>
+      <p className={clsx("intro")}>
         <b>Example pages:</b>{" "}
         {samplePageLinks.map((link, i) => (
           <React.Fragment key={link.url}>
@@ -96,16 +97,16 @@ const IndexPage = () => (
         Edit <code>src/pages/index.js</code> to update this page.
       </p>
     </div>
-    <ul className={styles.list}>
+    <ul className={clsx("list")}>
       {links.map(link => (
-        <li key={link.url} className={styles.listItem}>
+        <li key={link.url} className={clsx("listItem")}>
           <a
-            className={styles.listItemLink}
+            className={clsx("listItemLink")}
             href={`${link.url}${utmParameters}`}
           >
             {link.text} ↗
           </a>
-          <p className={styles.listItemDescription}>{link.description}</p>
+          <p className={clsx("listItemDescription")}>{link.description}</p>
         </li>
       ))}
     </ul>

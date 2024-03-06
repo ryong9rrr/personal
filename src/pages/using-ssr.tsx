@@ -4,7 +4,13 @@ import { Link } from "gatsby"
 import Layout from "~/react/components/layout"
 import Seo from "~/react/components/seo"
 
-const UsingSSR = ({ serverData }) => {
+interface UsingSSRProps {
+  serverData: {
+    message?: string
+  }
+}
+
+const UsingSSR = ({ serverData }: UsingSSRProps) => {
   return (
     <Layout>
       <h1>
