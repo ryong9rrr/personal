@@ -16,18 +16,10 @@ module.exports = {
   },
   plugins: [
     {
-      resolve: "gatsby-plugin-typescript",
-      options: {
-        isTSX: true,
-        allExtensions: true,
-      },
-    },
-    `gatsby-plugin-image`,
-    {
       resolve: `gatsby-source-filesystem`,
       options: {
         path: `${__dirname}/contents`,
-        name: `blog`,
+        name: `contents`,
       },
     },
     {
@@ -37,22 +29,19 @@ module.exports = {
         path: `${__dirname}/src/assets/images`,
       },
     },
-    `gatsby-transformer-sharp`,
+    `gatsby-plugin-image`,
     `gatsby-plugin-sharp`,
-    {
-      resolve: `gatsby-plugin-manifest`,
-      options: {
-        name: `gatsby-starter-default`,
-        short_name: `starter`,
-        start_url: `/`,
-        background_color: `#663399`,
-        // This will impact how browsers show your PWA/website
-        // https://css-tricks.com/meta-theme-color-and-trickery/
-        // theme_color: `#663399`,
-        display: `minimal-ui`,
-        icon: `src/assets/images/gatsby-icon.png`, // This path is relative to the root of the site.
-      },
-    },
+    // {
+    //   resolve: ,
+    //   options: {
+    //     defaults: {
+    //       formats: ["auto", "webp"],
+    //       quality: 100,
+    //       placeholder: "blurred",
+    //     },
+    //   },
+    // },
+    `gatsby-transformer-sharp`,
     {
       // Markdown Parser 역할을 하는 라이브러리입니다. 마크다운 문법을 HTML 형태로 변환해주어 띄워줄 수 있도록 해주는 핵심 라이브러리입니다.
       resolve: `gatsby-transformer-remark`,
@@ -95,6 +84,27 @@ module.exports = {
             },
           },
         ],
+      },
+    },
+    {
+      resolve: "gatsby-plugin-typescript",
+      options: {
+        isTSX: true,
+        allExtensions: true,
+      },
+    },
+    {
+      resolve: `gatsby-plugin-manifest`,
+      options: {
+        name: `gatsby-starter-default`,
+        short_name: `starter`,
+        start_url: `/`,
+        background_color: `#663399`,
+        // This will impact how browsers show your PWA/website
+        // https://css-tricks.com/meta-theme-color-and-trickery/
+        // theme_color: `#663399`,
+        display: `minimal-ui`,
+        icon: `src/assets/images/gatsby-icon.png`, // This path is relative to the root of the site.
       },
     },
   ],

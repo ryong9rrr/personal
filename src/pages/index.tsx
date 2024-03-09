@@ -1,15 +1,16 @@
 import "./index.css"
 import React from "react"
 import { Link, PageProps, graphql } from "gatsby"
-import { StaticImage } from "gatsby-plugin-image"
+import { IGatsbyImageData, StaticImage } from "gatsby-plugin-image"
 import { clsx } from "clsx"
 
 import Layout from "~/react/components/layout"
 import Seo from "~/react/components/seo"
-import { Post } from "~/types"
 
 const IndexPage = ({ data }: PageProps<QueryResult>) => {
   const posts = data.allMarkdownRemark.edges
+
+  console.log(posts)
 
   return (
     <Layout>
@@ -26,7 +27,15 @@ const IndexPage = ({ data }: PageProps<QueryResult>) => {
       </div>
       <ul>
         {posts.map(post => (
-          <li key={post.node.id}>{post.node.frontmatter.title}</li>
+          <li key={post.node.id}>
+            {
+              <img
+                {...post.node.frontmatter.thumbnail?.childImageSharp
+                  .gatsbyImageData.images.fallback}
+              />
+            }
+            <div>{post.node.frontmatter.title}</div>
+          </li>
         ))}
       </ul>
     </Layout>
@@ -48,17 +57,42 @@ interface QueryResult {
   }
 }
 
+type Post = {
+  node: {
+    id: string
+    frontmatter: {
+      title: string
+      summary: string
+      date: string
+      categories: string[]
+      thumbnail: {
+        childImageSharp: {
+          gatsbyImageData: IGatsbyImageData
+        }
+      } | null
+    }
+  }
+}
+
 export const getPostList = graphql`
   query getPostList {
-    allMarkdownRemark(sort: { frontmatter: { date: DESC } }) {
+    allMarkdownRemark(
+      sort: [{ frontmatter: { date: DESC } }, { frontmatter: { title: ASC } }]
+    ) {
       edges {
         node {
           id
           frontmatter {
             title
-            date
             summary
+            date(formatString: "YYYY.MM.DD.")
             categories
+            thumbnail {
+              publicURL
+              childImageSharp {
+                gatsbyImageData(width: 768, height: 400)
+              }
+            }
           }
         }
       }
